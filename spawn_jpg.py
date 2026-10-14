@@ -40,6 +40,8 @@ def process_gpu(gpu_id, total_gpus):
                 "visualization=none",
                 "pipeline=[bbox_detector,reid,track,pitch,calibration,tracklet_agg,team,team_side]",
                 "modules.tracklet_agg.cfg.attributes=[role]",
+                "modules.calibration.image_width=1024",
+                "modules.calibration.image_height=576",
                 # "~visualization.visualizers.radar"
             ]
             

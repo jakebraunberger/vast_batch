@@ -3,6 +3,6 @@ vastai create instance 29679181 \
     --disk 60 \
     --jupyter \
     --jupyter-lab \
-    --onstart-cmd "curl -sL https://raw.githubusercontent.com/jakebraunberger/vast_batch/main/bootstrap.sh | bash -x"
+    --onstart-cmd "curl -sL https://raw.githubusercontent.com/jakebraunberger/vast_batch/main/bootstrap.sh | bash -x > /workspace/tmp"
 
 vastai search offers 'gpu_name=L40S disk_space>=60'

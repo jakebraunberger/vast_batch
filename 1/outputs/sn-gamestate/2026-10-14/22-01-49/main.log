@@ -1,0 +1,17 @@
+[2026-10-14 22:01:50,118][tracklab.main][INFO] - Run directory: /workspace/sn-gamestate/outputs/sn-gamestate/2026-10-14/22-01-49
+[2026-10-14 22:01:50,125][tracklab.main][INFO] - Using device: 'cuda'.
+[2026-10-14 22:01:53,030][tracklab.main][INFO] - ImageFolderDataset= val set: 1
+[2026-10-14 22:01:58,539][nbjw_calib.model.cls_hrnet][INFO] - => init weights from normal distribution
+[2026-10-14 22:02:00,112][nbjw_calib.model.cls_hrnet_l][INFO] - => init weights from normal distribution
+[2026-10-14 22:02:00,756][tracklab.pipeline.module][INFO] - Pipeline: YOLOUltralytics -> PRTReId -> BPBReIDStrongSORT -> NBJW_Calib_Keypoints -> NBJW_Calib -> MajorityVoteTracklet -> TrackletTeamClustering -> TrackletTeamSideLabeling
+[2026-10-14 22:02:00,758][tracklab.main][INFO] - Starting tracking operation on val set.
+[2026-10-14 22:02:00,762][tracklab.datastruct.tracker_state][INFO] - Saving TrackerState to /workspace/sn-gamestate/outputs/sn-gamestate/2026-10-14/22-01-49/states/sn-gamestate.pklz
+[2026-10-14 22:02:00,763][tracklab.pipeline.module][INFO] - Pipeline has been validated
+[2026-10-14 22:02:01,760][torch.distributed.nn.jit.instantiator][INFO] - Created a temporary directory at /tmp/tmp7k7sbuei
+[2026-10-14 22:02:01,765][torch.distributed.nn.jit.instantiator][INFO] - Writing /tmp/tmp7k7sbuei/_remote_module_non_scriptable.py
+[2026-10-14 22:09:59,373][tracklab.datastruct.tracker_state][INFO] - Tracking ended, final TrackerState stats:
+[2026-10-14 22:09:59,375][tracklab.datastruct.tracker_state][INFO] - Total # detections: 12211 (GT=0)
+[2026-10-14 22:09:59,385][tracklab.datastruct.tracker_state][INFO] - Total # detections with track_id: 12211
+[2026-10-14 22:09:59,387][tracklab.datastruct.tracker_state][INFO] - Total # track_ids: 135
+[2026-10-14 22:09:59,389][tracklab.main][WARNING] - Skipping evaluation because 'eval_tracking' was set to False.
+[2026-10-14 22:09:59,391][tracklab.main][INFO] - Saved state at : /workspace/sn-gamestate/outputs/sn-gamestate/2026-10-14/22-01-49/states/sn-gamestate.pklz

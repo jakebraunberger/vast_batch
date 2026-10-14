@@ -1,0 +1,7 @@
+- dataset=image_folder
+- dataset.video_path=/workspace/sn-gamestate/videos/000_barcelona_v_newcastle/videos/barcelona_v_newcastle_034_frames
+- dataset.eval_set=val
+- eval_tracking=false
+- visualization=none
+- pipeline=[bbox_detector,reid,track,pitch,calibration,tracklet_agg,team,team_side]
+- modules.tracklet_agg.cfg.attributes=[role]
