@@ -1,0 +1,17 @@
+[2026-10-14 19:14:27,966][tracklab.main][INFO] - Run directory: /workspace/sn-gamestate/outputs/sn-gamestate/2026-10-14/19-14-27
+[2026-10-14 19:14:27,976][tracklab.main][INFO] - Using device: 'cuda'.
+[2026-10-14 19:14:31,172][tracklab.main][INFO] - ImageFolderDataset= val set: 1
+[2026-10-14 19:14:36,007][nbjw_calib.model.cls_hrnet][INFO] - => init weights from normal distribution
+[2026-10-14 19:14:37,804][nbjw_calib.model.cls_hrnet_l][INFO] - => init weights from normal distribution
+[2026-10-14 19:14:38,585][tracklab.pipeline.module][INFO] - Pipeline: YOLOUltralytics -> PRTReId -> BPBReIDStrongSORT -> NBJW_Calib_Keypoints -> NBJW_Calib -> MajorityVoteTracklet -> TrackletTeamClustering -> TrackletTeamSideLabeling
+[2026-10-14 19:14:38,589][tracklab.main][INFO] - Starting tracking operation on val set.
+[2026-10-14 19:14:38,594][tracklab.datastruct.tracker_state][INFO] - Saving TrackerState to /workspace/sn-gamestate/outputs/sn-gamestate/2026-10-14/19-14-27/states/sn-gamestate.pklz
+[2026-10-14 19:14:38,596][tracklab.pipeline.module][INFO] - Pipeline has been validated
+[2026-10-14 19:14:39,572][torch.distributed.nn.jit.instantiator][INFO] - Created a temporary directory at /tmp/tmp1dzfdqyh
+[2026-10-14 19:14:39,576][torch.distributed.nn.jit.instantiator][INFO] - Writing /tmp/tmp1dzfdqyh/_remote_module_non_scriptable.py
+[2026-10-14 19:17:30,924][tracklab.datastruct.tracker_state][INFO] - Tracking ended, final TrackerState stats:
+[2026-10-14 19:17:30,926][tracklab.datastruct.tracker_state][INFO] - Total # detections: 4425 (GT=0)
+[2026-10-14 19:17:30,931][tracklab.datastruct.tracker_state][INFO] - Total # detections with track_id: 4425
+[2026-10-14 19:17:30,933][tracklab.datastruct.tracker_state][INFO] - Total # track_ids: 65
+[2026-10-14 19:17:30,935][tracklab.main][WARNING] - Skipping evaluation because 'eval_tracking' was set to False.
+[2026-10-14 19:17:30,936][tracklab.main][INFO] - Saved state at : /workspace/sn-gamestate/outputs/sn-gamestate/2026-10-14/19-14-27/states/sn-gamestate.pklz

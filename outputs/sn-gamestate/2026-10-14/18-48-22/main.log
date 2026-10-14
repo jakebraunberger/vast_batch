@@ -1,0 +1,17 @@
+[2026-10-14 18:48:22,713][tracklab.main][INFO] - Run directory: /workspace/sn-gamestate/outputs/sn-gamestate/2026-10-14/18-48-22
+[2026-10-14 18:48:22,724][tracklab.main][INFO] - Using device: 'cuda'.
+[2026-10-14 18:48:25,994][tracklab.main][INFO] - ImageFolderDataset= val set: 1
+[2026-10-14 18:48:30,654][nbjw_calib.model.cls_hrnet][INFO] - => init weights from normal distribution
+[2026-10-14 18:48:32,378][nbjw_calib.model.cls_hrnet_l][INFO] - => init weights from normal distribution
+[2026-10-14 18:48:33,056][tracklab.pipeline.module][INFO] - Pipeline: YOLOUltralytics -> PRTReId -> BPBReIDStrongSORT -> NBJW_Calib_Keypoints -> NBJW_Calib -> MajorityVoteTracklet -> TrackletTeamClustering -> TrackletTeamSideLabeling
+[2026-10-14 18:48:33,058][tracklab.main][INFO] - Starting tracking operation on val set.
+[2026-10-14 18:48:33,062][tracklab.datastruct.tracker_state][INFO] - Saving TrackerState to /workspace/sn-gamestate/outputs/sn-gamestate/2026-10-14/18-48-22/states/sn-gamestate.pklz
+[2026-10-14 18:48:33,064][tracklab.pipeline.module][INFO] - Pipeline has been validated
+[2026-10-14 18:48:34,024][torch.distributed.nn.jit.instantiator][INFO] - Created a temporary directory at /tmp/tmp9xv6az43
+[2026-10-14 18:48:34,029][torch.distributed.nn.jit.instantiator][INFO] - Writing /tmp/tmp9xv6az43/_remote_module_non_scriptable.py
+[2026-10-14 18:53:17,729][tracklab.datastruct.tracker_state][INFO] - Tracking ended, final TrackerState stats:
+[2026-10-14 18:53:17,733][tracklab.datastruct.tracker_state][INFO] - Total # detections: 11897 (GT=0)
+[2026-10-14 18:53:17,745][tracklab.datastruct.tracker_state][INFO] - Total # detections with track_id: 11897
+[2026-10-14 18:53:17,747][tracklab.datastruct.tracker_state][INFO] - Total # track_ids: 95
+[2026-10-14 18:53:17,751][tracklab.main][WARNING] - Skipping evaluation because 'eval_tracking' was set to False.
+[2026-10-14 18:53:17,753][tracklab.main][INFO] - Saved state at : /workspace/sn-gamestate/outputs/sn-gamestate/2026-10-14/18-48-22/states/sn-gamestate.pklz

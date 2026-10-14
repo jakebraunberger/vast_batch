@@ -1,0 +1,17 @@
+[2026-10-14 18:12:39,288][tracklab.main][INFO] - Run directory: /workspace/sn-gamestate/outputs/sn-gamestate/2026-10-14/18-12-39
+[2026-10-14 18:12:39,296][tracklab.main][INFO] - Using device: 'cuda'.
+[2026-10-14 18:12:42,658][tracklab.main][INFO] - ImageFolderDataset= val set: 1
+[2026-10-14 18:12:47,315][nbjw_calib.model.cls_hrnet][INFO] - => init weights from normal distribution
+[2026-10-14 18:12:49,043][nbjw_calib.model.cls_hrnet_l][INFO] - => init weights from normal distribution
+[2026-10-14 18:12:53,751][tracklab.pipeline.module][INFO] - Pipeline: YOLOUltralytics -> PRTReId -> BPBReIDStrongSORT -> NBJW_Calib_Keypoints -> NBJW_Calib -> MMOCR -> MajorityVoteTracklet -> TrackletTeamClustering -> TrackletTeamSideLabeling
+[2026-10-14 18:12:53,761][tracklab.main][INFO] - Starting tracking operation on val set.
+[2026-10-14 18:12:53,769][tracklab.datastruct.tracker_state][INFO] - Saving TrackerState to /workspace/sn-gamestate/outputs/sn-gamestate/2026-10-14/18-12-39/states/sn-gamestate.pklz
+[2026-10-14 18:12:53,771][tracklab.pipeline.module][INFO] - Pipeline has been validated
+[2026-10-14 18:12:55,139][torch.distributed.nn.jit.instantiator][INFO] - Created a temporary directory at /tmp/tmpm7j7o48q
+[2026-10-14 18:12:55,141][torch.distributed.nn.jit.instantiator][INFO] - Writing /tmp/tmpm7j7o48q/_remote_module_non_scriptable.py
+[2026-10-14 18:24:05,513][tracklab.datastruct.tracker_state][INFO] - Tracking ended, final TrackerState stats:
+[2026-10-14 18:24:05,516][tracklab.datastruct.tracker_state][INFO] - Total # detections: 11514 (GT=0)
+[2026-10-14 18:24:05,527][tracklab.datastruct.tracker_state][INFO] - Total # detections with track_id: 11514
+[2026-10-14 18:24:05,529][tracklab.datastruct.tracker_state][INFO] - Total # track_ids: 111
+[2026-10-14 18:24:05,532][tracklab.main][WARNING] - Skipping evaluation because 'eval_tracking' was set to False.
+[2026-10-14 18:24:05,534][tracklab.main][INFO] - Saved state at : /workspace/sn-gamestate/outputs/sn-gamestate/2026-10-14/18-12-39/states/sn-gamestate.pklz

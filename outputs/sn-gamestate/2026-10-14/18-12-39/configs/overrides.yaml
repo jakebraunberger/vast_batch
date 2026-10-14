@@ -1,0 +1,6 @@
+- dataset=image_folder
+- visualization.save_videos=false
+- dataset.video_path=/workspace/sn-gamestate/videos/000_barcelona_v_newcastle/videos/barcelona_v_newcastle_034_frames
+- dataset.eval_set=val
+- eval_tracking=false
+- ~visualization.visualizers.radar

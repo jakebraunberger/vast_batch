@@ -1,0 +1,466 @@
+dataset:
+  dataset_path: ${data_dir}/SoccerNetGS
+  nvid: 1
+  nframes: -1
+  eval_set: val
+  vids_dict:
+    train: []
+    val: []
+    test: []
+    valid: []
+  track_eval:
+    dataset_class: MotChallenge2DBox
+    BENCHMARK: MotChallenge2DBox
+    GT_FOLDER: eval/gt
+    GT_LOC_FORMAT: '{gt_folder}/{seq}.txt'
+    TRACKERS_FOLDER: eval/pred
+    TRACKER_SUB_FOLDER: ''
+    OUTPUT_FOLDER: eval/results
+    OUTPUT_SUB_FOLDER: ''
+    SPLIT_TO_EVAL: ${dataset.eval_set}
+    PRINT_CONFIG: false
+    DO_PREPROC: false
+  _target_: sn_gamestate.dataset.image_folder.ImageFolderDataset
+  video_path: /workspace/sn-gamestate/videos/000_barcelona_v_newcastle/videos/barcelona_v_newcastle_033_frames
+eval:
+  _target_: tracklab.wrappers.TrackEvalEvaluator
+  show_progressbar: true
+  eval_set: ${dataset.eval_set}
+  dataset_path: ${dataset.dataset_path}
+  cfg:
+    save_gt: false
+    bbox_column_for_eval: bbox_ltwh
+    metrics:
+    - CLEAR
+    - HOTA
+    - Identity
+    eval:
+      USE_PARALLEL: true
+      NUM_PARALLEL_CORES: ${num_cores}
+      BREAK_ON_ERROR: false
+      PRINT_RESULTS: true
+      PRINT_ONLY_COMBINED: true
+      PRINT_CONFIG: false
+      TIME_PROGRESS: false
+      DISPLAY_LESS_PROGRESS: false
+      OUTPUT_SUMMARY: true
+      OUTPUT_EMPTY_CLASSES: false
+      OUTPUT_DETAILED: true
+      PLOT_CURVES: true
+    dataset: ${dataset.track_eval}
+engine:
+  _target_: tracklab.engine.OfflineTrackingEngine
+  num_workers: ${num_cores}
+  callbacks:
+    progress:
+      _target_: tracklab.callbacks.Progressbar
+      use_rich: ${use_rich}
+    vis: ${visualization}
+visualization:
+  video_fps: 25
+  colors:
+    bbox:
+      no_id: null
+      prediction: track_id
+      ground_truth:
+      - 0
+      - 255
+      - 0
+    text:
+      no_id: null
+      prediction: track_id
+      ground_truth:
+      - 0
+      - 255
+      - 0
+    keypoint:
+      no_id: null
+      prediction: track_id
+      ground_truth:
+      - 0
+      - 255
+      - 0
+    cmap: 22
+    team:
+      no_team: null
+      prediction:
+        left:
+        - 0
+        - 0
+        - 255
+        right:
+        - 255
+        - 0
+        - 0
+        referee:
+        - 238
+        - 210
+        - 2
+      ground_truth:
+        left:
+        - 0
+        - 255
+        - 0
+        right:
+        - 0
+        - 255
+        - 0
+        referee:
+        - 255
+        - 255
+        - 0
+    default:
+      no_id: null
+      prediction: team
+      ground_truth: null
+  _target_: tracklab.visualization.VisualizationEngine
+  save_videos: false
+  visualizers:
+    frame_counter:
+      _target_: tracklab.visualization.FrameCount
+    pitch:
+      _target_: sn_gamestate.visualization.Pitch
+    players:
+      _target_: sn_gamestate.visualization.CompletePlayerEllipse
+  cfg:
+    save_videos: true
+modules:
+  bbox_detector:
+    _target_: tracklab.wrappers.bbox_detector.yolo_ultralytics_api.YOLOUltralytics
+    batch_size: 16
+    cfg:
+      path_to_checkpoint: ${model_dir}/yolo/yolo11m.pt
+      min_confidence: 0.4
+  reid:
+    dataset:
+      name: SoccerNet
+      nickname: sn
+      fig_size:
+      - 384
+      - 128
+      mask_size:
+      - 64
+      - 32
+      max_crop_size:
+      - 256
+      - 128
+      masks_mode: pose_on_img_crops
+      enable_human_parsing_labels: false
+      eval_metric: mot_intra_video
+      columns:
+      - role
+      - team
+      - jersey_number
+      multi_video_queries_only: false
+      train:
+        set_name: train
+        min_vis: 0.3
+        min_h: 30
+        min_w: 30
+        min_samples_per_id: 4
+        max_samples_per_id: 15
+        max_total_ids: -1
+      test:
+        set_name: valid
+        min_vis: 0.0
+        min_h: 0
+        min_w: 0
+        min_samples_per_id: 4
+        max_samples_per_id: 10
+        max_total_ids: -1
+        ratio_query_per_id: 0.2
+    _target_: sn_gamestate.reid.prtreid_api.PRTReId
+    batch_size: 128
+    job_id: ${oc.env:SLURM_JOBID,0}
+    save_path: reid
+    use_keypoints_visibility_scores_for_reid: false
+    training_enabled: false
+    cfg:
+      project:
+        name: TrackLab
+        experiment_name: ''
+        notes: ''
+        tags: []
+        logger:
+          use_tensorboard: false
+          use_wandb: false
+      data:
+        root: ${data_dir}/reid
+        type: image
+        sources:
+        - SoccerNet
+        targets:
+        - SoccerNet
+        height: 256
+        width: 128
+        combineall: false
+        transforms:
+        - rc
+        - re
+        save_dir: ''
+        workers: ${num_cores}
+      sampler:
+        train_sampler: PrtreidSampler
+        train_sampler_t: PrtreidSampler
+        num_instances: 4
+      model:
+        name: bpbreid
+        pretrained: true
+        save_model_flag: true
+        load_config: true
+        load_weights: ${model_dir}/reid/prtreid-soccernet-baseline.pth.tar
+        bpbreid:
+          pooling: gwap
+          normalization: identity
+          mask_filtering_training: false
+          mask_filtering_testing: false
+          training_binary_visibility_score: true
+          testing_binary_visibility_score: true
+          last_stride: 1
+          learnable_attention_enabled: false
+          dim_reduce: after_pooling
+          dim_reduce_output: 256
+          backbone: hrnet32
+          test_embeddings:
+          - globl
+          test_use_target_segmentation: none
+          shared_parts_id_classifier: false
+          hrnet_pretrained_path: ${model_dir}/reid
+          masks:
+            type: disk
+            dir: ${.....dataset.masks_mode}
+            preprocess: id
+      loss:
+        name: part_based
+        part_based:
+          name: part_averaged_triplet_loss
+          ppl: cl
+          weights:
+            globl:
+              id: 1.0
+              tr: 1.0
+            foreg:
+              id: 0.0
+              tr: 0.0
+            conct:
+              id: 0.0
+              tr: 0.0
+            parts:
+              id: 0.0
+              tr: 0.0
+            pixls:
+              ce: 0.0
+      train:
+        batch_size: 32
+        max_epoch: 20
+      test:
+        evaluate: true
+        detailed_ranking: false
+        start_eval: 40
+        batch_size: 64
+        batch_size_pairwise_dist_matrix: 5000
+        normalize_feature: true
+        dist_metric: euclidean
+        visrank: true
+        visrank_per_body_part: false
+        vis_embedding_projection: false
+        vis_feature_maps: false
+        visrank_topk: 10
+        visrank_count: 4
+        visrank_q_idx_list: []
+        part_based:
+          dist_combine_strat: mean
+  track:
+    _target_: tracklab.wrappers.BPBReIDStrongSORT
+    cfg:
+      ecc: false
+      ema_alpha: 0.9
+      mc_lambda: 0.995
+      max_dist: 0.5
+      motion_criterium: iou
+      max_iou_distance: 0.8
+      max_oks_distance: 0.7
+      max_age: 300
+      n_init: 0
+      nn_budget: 100
+      min_bbox_confidence: 0.0
+      only_position_for_kf_gating: false
+      max_kalman_prediction_without_update: 7
+      matching_strategy: strong_sort_matching
+      gating_thres_factor: 1
+      w_kfgd: 1
+      w_reid: 1
+      w_st: 1
+      use_only_foreground_embedding: false
+      disable_gating: false
+      disable_second_stage: false
+    batch_size: 128
+  jersey_number_detect:
+    _target_: sn_gamestate.jersey.mmocr_api.MMOCR
+    batch_size: 16
+  team:
+    _target_: sn_gamestate.team.TrackletTeamClustering
+  team_side:
+    _target_: sn_gamestate.team.TrackletTeamSideLabeling
+    cfg: null
+  tracklet_agg:
+    _target_: tracklab.wrappers.MajorityVoteTracklet
+    cfg:
+      attributes:
+      - jersey_number
+      - role
+  pitch:
+    _target_: sn_gamestate.calibration.nbjw_calib.NBJW_Calib_Keypoints
+    checkpoint_kp: ${model_dir}/calibration/SV_kp
+    checkpoint_l: ${model_dir}/calibration/SV_lines
+    image_width: 1920
+    image_height: 1080
+    batch_size: 2
+    cfg:
+      MODEL:
+        IMAGE_SIZE:
+        - 960
+        - 540
+        NUM_JOINTS: 58
+        PRETRAIN: ''
+        EXTRA:
+          FINAL_CONV_KERNEL: 1
+          STAGE1:
+            NUM_MODULES: 1
+            NUM_BRANCHES: 1
+            BLOCK: BOTTLENECK
+            NUM_BLOCKS:
+            - 4
+            NUM_CHANNELS:
+            - 64
+            FUSE_METHOD: SUM
+          STAGE2:
+            NUM_MODULES: 1
+            NUM_BRANCHES: 2
+            BLOCK: BASIC
+            NUM_BLOCKS:
+            - 4
+            - 4
+            NUM_CHANNELS:
+            - 48
+            - 96
+            FUSE_METHOD: SUM
+          STAGE3:
+            NUM_MODULES: 4
+            NUM_BRANCHES: 3
+            BLOCK: BASIC
+            NUM_BLOCKS:
+            - 4
+            - 4
+            - 4
+            NUM_CHANNELS:
+            - 48
+            - 96
+            - 192
+            FUSE_METHOD: SUM
+          STAGE4:
+            NUM_MODULES: 3
+            NUM_BRANCHES: 4
+            BLOCK: BASIC
+            NUM_BLOCKS:
+            - 4
+            - 4
+            - 4
+            - 4
+            NUM_CHANNELS:
+            - 48
+            - 96
+            - 192
+            - 384
+            FUSE_METHOD: SUM
+    cfg_l:
+      MODEL:
+        IMAGE_SIZE:
+        - 960
+        - 540
+        NUM_JOINTS: 24
+        PRETRAIN: ''
+        EXTRA:
+          FINAL_CONV_KERNEL: 1
+          STAGE1:
+            NUM_MODULES: 1
+            NUM_BRANCHES: 1
+            BLOCK: BOTTLENECK
+            NUM_BLOCKS:
+            - 4
+            NUM_CHANNELS:
+            - 64
+            FUSE_METHOD: SUM
+          STAGE2:
+            NUM_MODULES: 1
+            NUM_BRANCHES: 2
+            BLOCK: BASIC
+            NUM_BLOCKS:
+            - 4
+            - 4
+            NUM_CHANNELS:
+            - 48
+            - 96
+            FUSE_METHOD: SUM
+          STAGE3:
+            NUM_MODULES: 4
+            NUM_BRANCHES: 3
+            BLOCK: BASIC
+            NUM_BLOCKS:
+            - 4
+            - 4
+            - 4
+            NUM_CHANNELS:
+            - 48
+            - 96
+            - 192
+            FUSE_METHOD: SUM
+          STAGE4:
+            NUM_MODULES: 3
+            NUM_BRANCHES: 4
+            BLOCK: BASIC
+            NUM_BLOCKS:
+            - 4
+            - 4
+            - 4
+            - 4
+            NUM_CHANNELS:
+            - 48
+            - 96
+            - 192
+            - 384
+            FUSE_METHOD: SUM
+  calibration:
+    _target_: sn_gamestate.calibration.nbjw_calib.NBJW_Calib
+    image_width: 1920
+    image_height: 1080
+    batch_size: 2
+    use_prev_homography: true
+    homography_export_dir: homographies
+  pose_bottomup:
+    batch_size: 16
+pipeline:
+- bbox_detector
+- reid
+- track
+- pitch
+- calibration
+- jersey_number_detect
+- tracklet_agg
+- team
+- team_side
+experiment_name: sn-gamestate
+home_dir: ${oc.env:HOME}
+data_dir: ${project_dir}/data
+model_dir: ${project_dir}/pretrained_models
+num_cores: 4
+use_wandb: false
+use_rich: true
+device: gpu
+test_tracking: true
+eval_tracking: false
+print_config: false
+state:
+  save_file: states/${experiment_name}.pklz
+  load_file: null
+project_dir: ${hydra:runtime.cwd}

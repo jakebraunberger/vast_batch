@@ -1,0 +1,18 @@
+[2026-10-14 17:05:34,580][tracklab.main][INFO] - Run directory: /workspace/sn-gamestate/outputs/sn-gamestate/2026-10-14/17-05-34
+[2026-10-14 17:05:34,586][tracklab.main][INFO] - Using device: 'cuda'.
+[2026-10-14 17:05:38,720][tracklab.main][INFO] - ExternalVideo= val set: 1
+[2026-10-14 17:05:43,855][nbjw_calib.model.cls_hrnet][INFO] - => init weights from normal distribution
+[2026-10-14 17:05:45,287][nbjw_calib.model.cls_hrnet_l][INFO] - => init weights from normal distribution
+[2026-10-14 17:05:50,140][tracklab.pipeline.module][INFO] - Pipeline: YOLOUltralytics -> PRTReId -> BPBReIDStrongSORT -> NBJW_Calib_Keypoints -> NBJW_Calib -> MMOCR -> MajorityVoteTracklet -> TrackletTeamClustering -> TrackletTeamSideLabeling
+[2026-10-14 17:05:50,148][tracklab.main][INFO] - Starting tracking operation on val set.
+[2026-10-14 17:05:50,153][tracklab.datastruct.tracker_state][INFO] - Saving TrackerState to /workspace/sn-gamestate/outputs/sn-gamestate/2026-10-14/17-05-34/states/sn-gamestate.pklz
+[2026-10-14 17:05:50,156][tracklab.pipeline.module][INFO] - Pipeline has been validated
+[2026-10-14 17:05:51,418][torch.distributed.nn.jit.instantiator][INFO] - Created a temporary directory at /tmp/tmpcbal0k1y
+[2026-10-14 17:05:51,420][torch.distributed.nn.jit.instantiator][INFO] - Writing /tmp/tmpcbal0k1y/_remote_module_non_scriptable.py
+[2026-10-14 17:25:04,581][tracklab.visualization.visualization_engine][INFO] - Visualization output at : /workspace/sn-gamestate/outputs/sn-gamestate/2026-10-14/17-05-34/visualization
+[2026-10-14 17:25:04,584][tracklab.datastruct.tracker_state][INFO] - Tracking ended, final TrackerState stats:
+[2026-10-14 17:25:04,585][tracklab.datastruct.tracker_state][INFO] - Total # detections: 7223 (GT=0)
+[2026-10-14 17:25:04,595][tracklab.datastruct.tracker_state][INFO] - Total # detections with track_id: 7223
+[2026-10-14 17:25:04,597][tracklab.datastruct.tracker_state][INFO] - Total # track_ids: 99
+[2026-10-14 17:25:04,600][tracklab.main][WARNING] - Skipping evaluation because 'eval_tracking' was set to False.
+[2026-10-14 17:25:04,602][tracklab.main][INFO] - Saved state at : /workspace/sn-gamestate/outputs/sn-gamestate/2026-10-14/17-05-34/states/sn-gamestate.pklz

@@ -1,0 +1,3 @@
+[2026-10-14 16:37:00,924][tracklab.main][INFO] - Run directory: /workspace/sn-gamestate/outputs/sn-gamestate/2026-10-14/16-37-00
+[2026-10-14 16:37:00,930][tracklab.main][INFO] - Using device: 'cuda'.
+[2026-10-14 16:37:05,373][tracklab.main][INFO] - ExternalVideo= val set: 1

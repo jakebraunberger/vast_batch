@@ -1,0 +1,8 @@
+vastai create instance 38574931 \
+    --image nvidia/cuda:12.8.0-devel-ubuntu22.04 \
+    --disk 60 \
+    --jupyter \
+    --jupyter-lab \
+    --onstart-url https://raw.githubusercontent.com/your-username/your-repo/main/bootstrap.sh
+
+vastai search offers 'gpu_name=L40S disk_space>=60'

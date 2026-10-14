@@ -1,0 +1,17 @@
+[2026-10-14 19:03:09,241][tracklab.main][INFO] - Run directory: /workspace/sn-gamestate/outputs/sn-gamestate/2026-10-14/19-03-09
+[2026-10-14 19:03:09,253][tracklab.main][INFO] - Using device: 'cuda'.
+[2026-10-14 19:03:12,601][tracklab.main][INFO] - ImageFolderDataset= val set: 1
+[2026-10-14 19:03:17,386][nbjw_calib.model.cls_hrnet][INFO] - => init weights from normal distribution
+[2026-10-14 19:03:19,236][nbjw_calib.model.cls_hrnet_l][INFO] - => init weights from normal distribution
+[2026-10-14 19:03:19,928][tracklab.pipeline.module][INFO] - Pipeline: YOLOUltralytics -> PRTReId -> BPBReIDStrongSORT -> NBJW_Calib_Keypoints -> NBJW_Calib -> MajorityVoteTracklet -> TrackletTeamClustering -> TrackletTeamSideLabeling
+[2026-10-14 19:03:19,930][tracklab.main][INFO] - Starting tracking operation on val set.
+[2026-10-14 19:03:19,935][tracklab.datastruct.tracker_state][INFO] - Saving TrackerState to /workspace/sn-gamestate/outputs/sn-gamestate/2026-10-14/19-03-09/states/sn-gamestate.pklz
+[2026-10-14 19:03:19,936][tracklab.pipeline.module][INFO] - Pipeline has been validated
+[2026-10-14 19:03:20,902][torch.distributed.nn.jit.instantiator][INFO] - Created a temporary directory at /tmp/tmp2yr1fb_0
+[2026-10-14 19:03:20,907][torch.distributed.nn.jit.instantiator][INFO] - Writing /tmp/tmp2yr1fb_0/_remote_module_non_scriptable.py
+[2026-10-14 19:07:28,680][tracklab.datastruct.tracker_state][INFO] - Tracking ended, final TrackerState stats:
+[2026-10-14 19:07:28,684][tracklab.datastruct.tracker_state][INFO] - Total # detections: 9027 (GT=0)
+[2026-10-14 19:07:28,698][tracklab.datastruct.tracker_state][INFO] - Total # detections with track_id: 9027
+[2026-10-14 19:07:28,701][tracklab.datastruct.tracker_state][INFO] - Total # track_ids: 102
+[2026-10-14 19:07:28,706][tracklab.main][WARNING] - Skipping evaluation because 'eval_tracking' was set to False.
+[2026-10-14 19:07:28,709][tracklab.main][INFO] - Saved state at : /workspace/sn-gamestate/outputs/sn-gamestate/2026-10-14/19-03-09/states/sn-gamestate.pklz

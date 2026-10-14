@@ -1,0 +1,11 @@
+[2026-10-14 18:32:13,377][tracklab.main][INFO] - Run directory: /workspace/sn-gamestate/outputs/sn-gamestate/2026-10-14/18-32-13
+[2026-10-14 18:32:13,384][tracklab.main][INFO] - Using device: 'cuda'.
+[2026-10-14 18:32:16,841][tracklab.main][INFO] - ImageFolderDataset= val set: 1
+[2026-10-14 18:32:22,429][nbjw_calib.model.cls_hrnet][INFO] - => init weights from normal distribution
+[2026-10-14 18:32:24,316][nbjw_calib.model.cls_hrnet_l][INFO] - => init weights from normal distribution
+[2026-10-14 18:32:24,999][tracklab.pipeline.module][INFO] - Pipeline: YOLOUltralytics -> PRTReId -> BPBReIDStrongSORT -> NBJW_Calib_Keypoints -> NBJW_Calib -> MajorityVoteTracklet -> TrackletTeamClustering -> TrackletTeamSideLabeling
+[2026-10-14 18:32:25,001][tracklab.main][INFO] - Starting tracking operation on val set.
+[2026-10-14 18:32:25,005][tracklab.datastruct.tracker_state][INFO] - Saving TrackerState to /workspace/sn-gamestate/outputs/sn-gamestate/2026-10-14/18-32-13/states/sn-gamestate.pklz
+[2026-10-14 18:32:25,007][tracklab.pipeline.module][INFO] - Pipeline has been validated
+[2026-10-14 18:32:25,981][torch.distributed.nn.jit.instantiator][INFO] - Created a temporary directory at /tmp/tmp9_l0cdsr
+[2026-10-14 18:32:25,986][torch.distributed.nn.jit.instantiator][INFO] - Writing /tmp/tmp9_l0cdsr/_remote_module_non_scriptable.py
