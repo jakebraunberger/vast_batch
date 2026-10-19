@@ -1,4 +1,0 @@
-- dataset=youtube
-- dataset.video_path=/workspace/sn-gamestate/videos/000_barcelona_v_newcastle/videos/barcelona_v_newcastle_030.mp4
-- eval_tracking=false
-- ~visualization.visualizers.radar

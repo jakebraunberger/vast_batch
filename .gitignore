@@ -2,3 +2,6 @@
 *.jpg
 *.JPG
 *.tar.*
+archive/
+cloudflare/
+outputs/

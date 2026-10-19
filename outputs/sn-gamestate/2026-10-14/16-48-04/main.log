@@ -1,7 +1,0 @@
-[2026-10-14 16:48:05,176][tracklab.main][INFO] - Run directory: /workspace/sn-gamestate/outputs/sn-gamestate/2026-10-14/16-48-04
-[2026-10-14 16:48:05,183][tracklab.main][INFO] - Using device: 'cuda'.
-[2026-10-14 16:48:09,360][tracklab.main][INFO] - ExternalVideo= val set: 1
-[2026-10-14 16:48:14,534][nbjw_calib.model.cls_hrnet][INFO] - => init weights from normal distribution
-[2026-10-14 16:48:16,015][nbjw_calib.model.cls_hrnet_l][INFO] - => init weights from normal distribution
-[2026-10-14 16:48:34,443][tracklab.pipeline.module][INFO] - Pipeline: YOLOUltralytics -> PRTReId -> BPBReIDStrongSORT -> NBJW_Calib_Keypoints -> NBJW_Calib -> MMOCR -> MajorityVoteTracklet -> TrackletTeamClustering -> TrackletTeamSideLabeling
-[2026-10-14 16:48:34,451][tracklab.main][INFO] - Starting tracking operation on valid set.
