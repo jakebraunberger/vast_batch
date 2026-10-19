@@ -1,0 +1,1 @@
+ssh -p 34741 root@ssh9.vast.ai "tail -n 25 /workspace/sn-gamestate/run.log"
